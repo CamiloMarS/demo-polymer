@@ -1,0 +1,13 @@
+{
+  "name": "demo-poly-app",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^3.0.1",
+    "paper-input": "PolymerElements/paper-input#^3.0.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  }
+}

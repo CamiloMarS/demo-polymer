@@ -1,0 +1,58 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+
+<dom-module id="todo-component">
+  <template>
+    <style>
+      .todoTitle {
+        margin: 0 auto;
+        font-size: 18px;
+      }
+      .todo {
+        border-radius: 10px;
+        cursor: pointer;
+        width: 250px;
+        height: 200px;
+        background: rgba(231, 215, 215, 0.575);
+        box-shadow: 2px 2px 2px #cac6c6;
+        color: rgb(85, 74, 74);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+      }
+      .textStrong {
+        color: #000;
+        display: block;
+        letter-spacing: 2px;
+        font-weight: bolder;
+      }
+    </style>
+
+    <div class="todo">
+      <h5 class="todoTitle">Title: [[title]]</h5>
+      <p><span class="textStrong">Descripción:</span> [[details]]</p>
+      <p><span class="textStrong">Extra:</span> [[extra]]</p>
+    </div>
+  </template>
+
+  <script>
+    class TodoComponent extends Polymer.Element {
+      static get is() {
+        return "todo-component";
+      }
+
+      static get properties() {
+        return {
+          title: { type: String },
+          details: { type: String },
+          extra: { type: String }
+        };
+      }
+    }
+
+    customElements.define(TodoComponent.is, TodoComponent);
+  </script>
+</dom-module>

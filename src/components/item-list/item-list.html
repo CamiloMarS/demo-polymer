@@ -1,0 +1,39 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+
+<dom-module id="item-list">
+  <dom-repeat is="dom-repeat" items="{ persons }" as="person">
+    <templeate>
+      <li>
+        <h5>Name: [[person.name]]</h5>
+        <p>LastName: [[ person.lastname ]]</p>
+      </li>
+    </templeate>
+  </dom-repeat>
+
+  <script>
+    class ItemList extends Polymer.Element {
+      static get is() {
+        return "item-list";
+      }
+
+      static get properties() {
+        return {
+          persons: {
+            type: Array,
+            value() {
+              return [
+                { name: "Miguel", lastname: "Kenji Tanaka", age: 25 },
+                { name: "Camilo", lastname: "Salazar Peláez", age: 21 }
+              ];
+            }
+          }
+        };
+      }
+    } //end class
+
+    customElements.define(ItemList.is, ItemList);
+  </script>
+</dom-module>

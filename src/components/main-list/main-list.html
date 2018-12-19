@@ -1,0 +1,57 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+<link rel="import" href="../item-list/item-list.html" />
+
+<dom-module id="main-list">
+  <template>
+    <style>
+      .contentList {
+        padding: 10px;
+        background: transparent;
+        width: 350px;
+        height: 200px;
+      }
+
+      .contentList:hover{
+        box-shadow: 1px 0px 1px #eee;
+      }
+    </style>
+
+    <div class="contentList">
+      <h3>[[titlelist]]</h3>
+      <ul>
+        <item-list
+          persons=[{ name: 'Test Name', lastname: 'Lastname Test' }]
+        ></item-list>
+      </ul>
+    </div>
+  </template>
+
+  <script>
+    class MainList extends Polymer.Element {
+      static get is() {
+        return "main-list";
+      }
+
+      static get properties() {
+        return {
+          titlelist: {
+            type: String,
+            readOnly: false,
+            notify: true,
+            value: "My List",
+            observer: "_checkNewValue"
+          }
+        };
+      }
+
+      _checkNewValue() {
+        console.log("El valor ha cambiado!");
+      }
+    } //end class
+
+    window.customElements.define(MainList.is, MainList);
+  </script>
+</dom-module>

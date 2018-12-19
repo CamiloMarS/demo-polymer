@@ -1,0 +1,46 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+
+<dom-module id="panel-app">
+  <style>
+    :host {
+      background: transparent;
+    }
+    .titlec {
+      text-align: "justify";
+      color: rgb(10, 10, 10);
+    }
+    .contentPanel {
+      width: 100%;
+      height: 80vh;
+    }
+  </style>
+
+  <template>
+    <div class="titleC"><p>[[titlePanel]]</p></div>
+    <div class="contentPanel">[[children]]</div>
+  </template>
+
+  <script>
+    class PanelApp extends Polymer.Element {
+      static get is() {
+        return "panel-app";
+      }
+
+      static get properties() {
+        return {
+          titlePanel: {
+            type: String
+          },
+          children: {
+            type: Element,
+            value: null
+          }
+        };
+      }
+    }
+    customElements.define(PanelApp.is, PanelApp);
+  </script>
+</dom-module>

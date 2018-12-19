@@ -1,0 +1,49 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html" />
+
+<dom-module id="avatar-box">
+  <template>
+    <style>
+      :host {
+        color: #fff;
+      }
+      .contentPicture {
+        padding: 5px;
+        background: rgb(238, 226, 226);
+      }
+      .avatarIMG {
+        position: relative;
+        height: 100px;
+        width: 100%;
+      }
+    </style>
+    <div class="contentPicture">
+      <img src="[[picture]]" alt="[[alt]]" class="avatarIMG" />
+    </div>
+  </template>
+  <script>
+    class AvatarBox extends Polymer.Element {
+      constructor() {
+        super();
+      }
+
+      static get is() {
+        return "avatar-box";
+      }
+
+      static get properties() {
+        return {
+          picture: {
+            type: String,
+            value: ""
+          },
+          alt: {
+            type: String,
+            value: "Title picture"
+          }
+        };
+      }
+    } // end class
+
+    window.customElements.define(AvatarBox.is, AvatarBox);
+  </script>
+</dom-module>
