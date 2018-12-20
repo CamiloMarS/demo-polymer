@@ -1,0 +1,78 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+<link
+  rel="import"
+  href="../../../bower_components/polymer-prop-types/polyer-prop-types.html"
+/>
+
+<dom-module id="menu-item">
+  <template>
+    <style>
+      .itemMenu {
+        border-bottom: 1px solid #bbb;
+        text-align: right;
+        padding: 0 5px;
+        width: 100%;
+        height: 5vh;
+      }
+    </style>
+    <div id="[[option.id]]" class="itemMenu" on-click="([[_handledClick]])">
+      <span> [[option.text]] </span>
+    </div>
+  </template>
+  <script>
+    class MenuItem extends Polymer.Element {
+      constructor() {
+        this.eventNameClick = "itemMenuEvent";
+      }
+
+      static get is() {
+        return "menu-item";
+      }
+
+      static get properties() {
+        return {
+          option: {
+            type: Object,
+            value: {
+              id: Math.random() * (100000 - 0) + 1,
+              text: "Test"
+            }
+          }
+        };
+      } //end properties
+
+      //Dispatch Event
+      _handledClick(){
+        const element = this.event.id;
+        if(typeof element !== 'undenfined'){
+            this.dispatchEvent(new CustomEvent(this.eventNameClick, {
+              detail:{
+                itemId: element
+              }
+            }));
+        }
+      }
+
+      ready(){
+        super.read();
+        this.$[this.option.id].addEventListener("click", _handledClick.bind(this));
+      }
+
+      static get propTypes() {
+        return {
+          option: PolymerPropTypes.PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PolymerPropTypes.PropTypes.number.isRequired,
+              text: PolymerPropTypes.PropTypes.string.isRequired
+            })
+          )
+        };
+      }
+    } //end class
+
+    customElements.define(MenuItem.is, MenuItem);
+  </script>
+</dom-module>

@@ -1,0 +1,56 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html"/>
+
+<dom-module id="navigation-bar">
+  <template>
+    <style>
+      :host {
+        width: 100%;
+      }
+      .navContent {
+        height: 10vh;
+        background: rgb(108, 108, 199);
+        display: flex;
+        justify-content: space-between;
+      }
+      .logoContent {
+        width: 40%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+      }
+      .imgLogo {
+        width: 60%;
+      }
+    </style>
+    <nav class="navContent">
+      <div class="logoContent">
+        <a href="[[linkHome]]"> <img class="imgLogo" src="[[logo]]" alt="logo"/></a>
+      </div>
+      <div class="itemsContent"><slot></slot></div>
+    </nav>
+  </template>
+
+  <script>
+    class NavigationBar extends Polymer.Element {
+      static get is() { return "navigation-bar"; }
+
+      static get properties() {
+        return {
+          logo: {
+            type: String,
+            value: `${
+              location.href
+            }src/assets/logos/logo-header-sngular-web.png`
+          },
+          linkHome: {
+            type: String,
+            value: "/"
+          }
+        };
+      }
+
+    } //end class
+    window.customElements.define(NavigationBar.is, NavigationBar);
+  </script>
+</dom-module>

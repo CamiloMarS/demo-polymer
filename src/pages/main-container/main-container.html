@@ -1,0 +1,50 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html"/>
+<!-- Componentes -->
+<link rel="import" href="../../components/navegation-bar/navegation-bar.html"/>
+<link rel="import" href="../../components/image-carrusel/image-carrusel.html"/>
+<link rel="import" href="../../components/menu-horizontal/menu-horizontal.html"/>
+
+<dom-module id="main-container">
+  <template>
+    <style>
+      :host {
+        width: 100%;
+      }
+    </style>
+
+    <div class="content">
+      <navigation-bar>  </navigation-bar>
+      <h2>{{ namepage }}</h2>
+      <menu-horizontal options="[[Menu]]"></menu-horizontal>
+    </div>
+  </template>
+
+  <script>
+    class MainContainer extends Polymer.Element {
+      static get is() {
+        return "main-container";
+      }
+
+      static get properties() {
+        return {
+          namepage: {
+            type: String,
+            value: "Home Page"
+          }
+        };
+      }
+
+      constructor(){
+        super();
+        this.Menu = [
+          { id: 0, text: "Home", href:"/" },
+          { id: 1, text: "Todos", href:"/"},
+          { id: 2, text: "Completed", href:"/"},
+          { id: 3, text: "About", href:"/" }
+        ];
+      }
+
+    } // end class
+    customElements.define(MainContainer.is, MainContainer);
+  </script>
+</dom-module>

@@ -20,18 +20,17 @@
       rel="import"
       href="./src/components/todo-component/todo-component.html"
     />
-    <link rel="import" href="./src/components/panel/panel-app.html"
+    <link rel="import" href="./src/pages/main-container/main-container.html" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
     <!-- Componente Principal -->
-    
-    <panel-app title="Panel" children=
-    <todo-component
-      title="DBS New Peli"
-      details="Ir al cine a ver DBS Batalla de los Diosos"
-      extra="Extra"
-    ></todo-component>>
 
-    </panel-app>
+    <main-container namepage="Home Page"></main-container>
   </body>
 </html>

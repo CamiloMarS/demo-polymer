@@ -1,0 +1,48 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+
+<!-- Custom Elements -->
+<link rel="import" href="./menu-item.html" />
+
+<dom-module id="menu-horizontal">
+  <template>
+    <style>
+      :host {
+        margin: 0;
+      }
+    </style>
+    <dom-repeat items="{{ options }}">
+      <template>
+        <menu-item option="{{item}}"></menu-item>
+      </template>
+    </dom-repeat>
+  </template>
+  <script>
+    class MenuHorizontal extends Polymer.Element {
+      //Name Element
+      static get is() {
+        return "menu-horizontal";
+      }
+
+      //Properties element
+      static get properties() {
+        return {
+          options: {
+            type: Array,
+            value(){ return [
+              { id: 0, text: "Example" },
+              { id: 1, text: "Example 2" }
+            ]}
+          }
+        };
+      }
+
+      connectedCallback(){
+        console.log(this.options);
+      }
+    } // end class
+    customElements.define(MenuHorizontal.is, MenuHorizontal);
+  </script>
+</dom-module>

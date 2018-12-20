@@ -4,25 +4,22 @@
 />
 
 <dom-module id="panel-app">
-  <style>
-    :host {
-      background: transparent;
-    }
-    .titlec {
-      text-align: "justify";
-      color: rgb(10, 10, 10);
-    }
-    .contentPanel {
-      width: 100%;
-      height: 80vh;
-    }
-  </style>
-
   <template>
+    <style>
+      :host {
+        background: transparent;
+      }
+      .titlec {
+        text-align: "justify";
+        color: rgb(10, 10, 10);
+      }
+      .contentPanel {
+        width: 100%;
+        height: 80vh;
+      }
+    </style>
     <div class="titleC"><p>[[titlePanel]]</p></div>
-    <div class="contentPanel">[[children]]</div>
   </template>
-
   <script>
     class PanelApp extends Polymer.Element {
       static get is() {
@@ -33,12 +30,12 @@
         return {
           titlePanel: {
             type: String
-          },
-          children: {
-            type: Element,
-            value: null
           }
         };
+      }
+
+      printTitlePanel() {
+        console.log(this.titlePanel);
       }
     }
     customElements.define(PanelApp.is, PanelApp);

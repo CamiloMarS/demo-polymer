@@ -1,0 +1,107 @@
+<link
+  rel="import"
+  href="../../../bower_components/polymer/polymer-element.html"
+/>
+
+<dom-module id="image-carrusel">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      div > ::slotted(:not([selected])) {
+        display: none;
+      }
+
+      /** Buttons styes **/
+      #prevBtn,
+      #nextBtn {
+        width: 50px;
+        height: 50px;
+        background: rgba(99, 224, 141, 0.5);
+        color: #fff;
+        font-size: 18px;
+        position: absolute;
+        top: 40%;
+        margin: 0 20px;
+        border: none;
+        border-radius: 50%;
+      }
+
+      #nextBtn {
+        right: 0;
+      }
+    </style>
+
+    <div><slot></slot></div>
+
+    <button id="prevBtn" on-click="([[previous]])">&#x276E;</button>
+    <button id="nextBtn" on-click="([[next]])">&#x276F;</button>
+  </template>
+  <script>
+    class ImageCarrusel extends Polymer.Element {
+      static get is() {
+        return "image-carrusel";
+      }
+
+      static get properties() {
+        return {
+          selected: {
+            type: Object,
+            observer: "_selectedChanged"
+          }
+        };
+      }
+
+      _resetSelected() {
+        if (!this.selected || this.selected.parentElement !== this) {
+          this.selected = this.firstElementChild;
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this.shadowRoot.addEventListener(
+          "slotchange",
+          this._resetSelected.bind(this)
+        );
+        this._resetSelected();
+      }
+
+      //My Properties
+      _selectedChanged(selected, oldSelected) {
+        if (oldSelected) oldSelected.removeAttribute("selected");
+        if (selected) selected.setAttribute("selected", "");
+        //Controlar cuando no haya previus
+        if (selected) {
+          this.$.prevBtn.disabled = !selected.previousElementSibling;
+          this.$.nextBtn.disabled = !selected.nextElementSibling;
+        } else {
+          this.$.prevBtn.disabled = true;
+          this.$.nextBtn.disabled = true;
+        }
+      }
+
+      //Methods publics
+      previous() {
+        const elem = this.selected && this.selected.previousElementSibling;
+        if (elem) this.selected = elem;
+      }
+      next() {
+        const elem = this.selected && this.selected.nextElementSibling;
+        if (elem) this.selected = elem;
+      }
+
+      ready() { //Bindeo
+        super.ready();
+        this.$.prevBtn.addEventListener("click", this.previous.bind(this));
+        this.$.nextBtn.addEventListener("click", this.next.bind(this));
+      }
+
+    } //end class
+    customElements.define(ImageCarrusel.is, ImageCarrusel);
+  </script>
+</dom-module>
